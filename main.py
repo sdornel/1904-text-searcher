@@ -4,7 +4,7 @@ def load_text_file(file_path):
     with open(file_path, "r", encoding="utf-8") as file:
         return file.read()
 
-def convert_to_nested_json(data):
+def convert_to_flattened_json(data):
     lines = data.strip().split("\n")
     nested_structure = {}
 
@@ -36,10 +36,8 @@ def convert_to_nested_json(data):
     for book, book_data in nested_structure.items():
         chapters = list(book_data["chapters"].values())
         json_structure.append({
-            "book": {
-                "book_name": book_data["book_name"],
-                "chapters": chapters
-            }
+            "book_name": book_data["book_name"],
+            "chapters": chapters
         })
 
     return json_structure
@@ -50,11 +48,13 @@ def save_json_file(data, file_path):
 
 def main():
     input_file = "transliterated.lowercase.txt"
-    output_file = "output.json"    
-    data = load_text_file(input_file)
-    nested_json_data = convert_to_nested_json(data)
+    output_file = "transliterated.lowercase.json"
 
-    save_json_file(nested_json_data, output_file)
+    data = load_text_file(input_file)
+
+    flattened_json_data = convert_to_flattened_json(data)
+
+    save_json_file(flattened_json_data, output_file)
     print(f"Conversion complete. JSON saved to {output_file}")
 
 if __name__ == "__main__":
