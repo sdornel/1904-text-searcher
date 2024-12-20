@@ -1,5 +1,6 @@
 import TransliteratedLowercase from '../../../transliterated.lowercase.json';
 
+// Allow for declaration merging
 export interface Verse {
     number: number;
     text: string;
@@ -15,9 +16,7 @@ export interface Book {
     chapters: Array<Chapter>;
 }
 
-export interface TransliteratedData {
-    book: Book;
-}
+export type TransliteratedData = Array<Book>;
 
 export default class Data {
     private static instance: Data;
@@ -31,7 +30,7 @@ export default class Data {
       return Data.instance;
     }
   
-    get transliteratedLowercase() {
+    get transliteratedLowercase(): TransliteratedData {
       return TransliteratedLowercase;
     }
 }
