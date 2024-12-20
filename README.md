@@ -1,5 +1,7 @@
 # 1904-text-searcher
 
+This repository contains copies of the 1904 Patriarchal Text
+
 To view the text in its entirety:
 - cat transliterated.lowercase.txt
 
