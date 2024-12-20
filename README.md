@@ -1,6 +1,6 @@
 # 1904-text-searcher
 
-This repository contains copies of the 1904 Patriarchal Text
+This repository contains copies of the 1904 Patriarchal Text. It uses texts found in https://github.com/bibleproofs/1904/
 
 To view the text in its entirety:
 - cat transliterated.lowercase.txt
