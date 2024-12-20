@@ -1,28 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
 
-export const Search: React.FC = () => {
+type SearchProps = {
+  handleSearch: (query: string) => void;
+};
+
+export const Search = ({ handleSearch }: SearchProps) => {
   const [query, setQuery] = useState('');
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setQuery(event.target.value);
   };
 
-  const handleSearch = () => {
-    console.log('searching', query);
+  const submit = (event: React.FormEvent): void => {
+    event.preventDefault();
+    handleSearch(query);
   };
 
   return (
-    <div>
+    <form onSubmit={submit}>
       <input
         type="text"
         placeholder="Enter search query"
         value={query}
         onChange={handleInputChange}
       />
-      <button onClick={handleSearch}>Search</button>
-    </div>
+      <button type="submit">Search</button>
+    </form>
   );
-}
+};
