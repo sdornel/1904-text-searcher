@@ -8,6 +8,10 @@ type TextContainerProps = {
 export const TextContainer = ({ searchInput }: TextContainerProps) => {
   const [filteredData, setFilteredData] = useState(Data.getInstance().transliteratedLowercase);
 
+  // TODO:
+  // add filter by book
+  // case statement to display entire book name instead of just 3 characters
+  // make macron optional in search
   useEffect((): void => {
     const allBooks: TransliteratedData = Data.getInstance().transliteratedLowercase;
 
