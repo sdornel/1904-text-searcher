@@ -1,5 +1,16 @@
 # 1904-text-searcher
 
+To view the text in its entirety:
+- cat transliterated.lowercase.txt
 
-If searching for this by via mac/linux terminal:
-- cat transliterated.lowercase.txt | grep "egō eimi"
+If searching for "egō eimi" via mac/linux terminal:
+- grep "egō eimi" transliterated.lowercase.txt
+
+To count the occurrences of the phrase "egō eimi" in transliterated.lowercase.txt, you can use the grep command with the -c option. This will count the number of matching lines:
+- grep -c "egō eimi" transliterated.lowercase.txt
+
+If you want to ensure that you're counting exact word matches and not partial matches (e.g., pantokratōros), use grep with the -w option:
+- grep -cw "pantokratōr" transliterated.lowercase.txt
+
+To highlight occurrences of the string in the output, use (assuming your terminal does not already highlight by default):
+- grep --color=always "egō eimi" transliterated.lowercase.txt
