@@ -1,5 +1,12 @@
 # 1904-text-searcher
 
+To get this app running:
+- First ensure you have node and a code editor installed
+- 1) git clone
+- 2) cd into website folder
+- 3) npm install
+- 4) npm run dev
+
 This repository contains copies of the 1904 Patriarchal text. It uses texts found in https://github.com/bibleproofs/1904/.
 It serves these purposes:
 - 1) Allows the public to easily access the 1904 Patriarchal text
