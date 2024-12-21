@@ -5,7 +5,7 @@ import App from './App.tsx'
 
 // https://react.dev/reference/react/StrictMode always calls rendering functions twice in development
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+  // <StrictMode>
     <App />
-  </StrictMode>,
+  // </StrictMode>,
 )

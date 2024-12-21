@@ -4,17 +4,28 @@ import Data, { Book, Chapter, TransliteratedData, Verse } from './data/data';
 
 type TextContainerProps = {
   searchInput: string;
+  selectedBook: string;
 }
-export const TextContainer = ({ searchInput }: TextContainerProps) => {
+export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps) => {
+  console.log('renderText');
   const [filteredData, setFilteredData] = useState(Data.getInstance().transliteratedLowercase);
 
   // TODO:
-  // add filter by book
-  // case statement to display entire book name instead of just 3 characters
+  // create options box with all the books
+  // add way to filter book by selecting from options box
+  // add number of times chosen query was found in the text
   useEffect((): void => {
     const allBooks: TransliteratedData = Data.getInstance().transliteratedLowercase;
-    console.log('allBooks', allBooks);
-    const filtered = allBooks.map((book) => ({
+
+    // Hashmap would be faster but there are only 27 entries
+    const filtered = allBooks
+    .filter((book) => {
+      if (selectedBook && book.book_name !== selectedBook) {
+        return false;
+      }
+      return true;
+    })
+    .map((book) => ({
       ...book,
       chapters: book.chapters
         .map((chapter) => ({
@@ -28,7 +39,7 @@ export const TextContainer = ({ searchInput }: TextContainerProps) => {
         })).filter((chapter) => chapter.verses.length > 0),
     })).filter((book) => book.chapters.length > 0);
     setFilteredData(filtered);
-  }, [searchInput]);
+  }, [searchInput, selectedBook]);
 
   // Documentation for text normalization https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize
   const normalizeText = (text: string): string => {
