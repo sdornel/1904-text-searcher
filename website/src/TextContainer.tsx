@@ -18,7 +18,6 @@ export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps)
   // need the found query to be highlighted red
   // ^ https://blog.logrocket.com/using-dangerouslysetinnerhtml-react-application/
   // ^ use dangerouslysetinnerhtml with warnings
-  // CICD pipeline
 
   // Finish writing test cases for this file. Mostly done but a few edge cases not covered
 
