@@ -67,7 +67,7 @@ export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps)
 
   return (
     <div>
-      {instances > 0 ? <span>Found {instances} instances</span> : null}
+      {instances > 0 ? <span>Found {instances} instance(s)</span> : null}
       {filteredData.map((book: Book, bookIndex: number) => (
         <div key={bookIndex}>
           <h2>{displayEntireBookName(book.book_name as keyof typeof NewTestamentBooks)}</h2>
