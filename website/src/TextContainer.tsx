@@ -18,12 +18,13 @@ export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps)
   // need the found query to be highlighted red
   // ^ https://blog.logrocket.com/using-dangerouslysetinnerhtml-react-application/
   // ^ use dangerouslysetinnerhtml with warnings
-  // add copy button to copy search results
   // CICD pipeline
+
+  // Finish writing test cases for this file. Mostly done but a few edge cases not covered
 
   // later TODO
   // have regex search that can find "ego" + random text + "eimi" (difficult to do, potential security vulnerability)
-  // ^ maybe multi word search with dynamically number of search fields
+  // ^ maybe multi word search with dynamic number of search fields
   useEffect((): void => {
     const allBooks: TransliteratedData = Data.getInstance().transliteratedLowercase;
     let foundInstances = 0;
