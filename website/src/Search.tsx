@@ -15,8 +15,14 @@ export const Search = ({ handleSearch, handleBookChange }: SearchProps) => {
     setQuery(event.target.value);
   };
 
-  const handleDropdownChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
-    setSelectedBook(event.target.value);
+  const handleDropdownChange = (event: React.ChangeEvent<HTMLSelectElement> | React.KeyboardEvent<HTMLSelectElement>): void => {
+    if ('key' in event) {
+      if (event.key === 'Enter') {
+        submit(event);
+      }
+    } else {
+      setSelectedBook(event.target.value);
+    }
   };
 
   const submit = (event: React.FormEvent): void => {
@@ -69,7 +75,11 @@ export const Search = ({ handleSearch, handleBookChange }: SearchProps) => {
           value={query}
           onChange={handleInputChange}
         />
-        <select value={selectedBook} onChange={handleDropdownChange}>
+        <select
+          value={selectedBook}
+          onChange={handleDropdownChange}
+          onKeyDown={handleDropdownChange}
+        >
           <option value=''>Select a Book</option>
           {Object.entries(newTestamentBooks).map(([key, name]) => (
             <option key={key} value={key}>
