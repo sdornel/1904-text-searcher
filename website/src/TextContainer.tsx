@@ -64,9 +64,38 @@ export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps)
     return NewTestamentBooks[key];
   }
 
+  const copyToClipboard = async () => {
+    const textToCopy = filteredData
+      .map((book) => {
+        const bookHeader = `Book: ${displayEntireBookName(book.book_name as keyof typeof NewTestamentBooks)}`;
+        const chapters = book.chapters
+          .map((chapter) => {
+            const chapterHeader = `  Chapter ${chapter.number}`;
+            const verses = chapter.verses
+              .map((verse) => `    ${verse.number}: ${verse.text}`)
+              .join('\n');
+            return `${chapterHeader}\n${verses}`;
+          })
+          .join('\n');
+        return `${bookHeader}\n${chapters}`;
+      })
+      .join('\n\n');
+
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+    } catch (err) {
+      console.error('Failed to copy search results: ', err);
+      alert('Error! Failed to copy search results.');
+    }
+  }
+
   return (
     <div>
       {instances > 0 ? <span>Found {instances} instance(s)</span> : null}
+      <br/>
+      <button onClick={copyToClipboard} style={{ margin: '10px 0' }}>
+        Copy Search Results
+      </button>
       {filteredData.map((book: Book, bookIndex: number) => (
         <div key={bookIndex}>
           <h2>{displayEntireBookName(book.book_name as keyof typeof NewTestamentBooks)}</h2>
