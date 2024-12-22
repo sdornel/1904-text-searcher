@@ -1,4 +1,4 @@
-import TransliteratedLowercase from '../../../transliterated.lowercase.json';
+import TransliteratedLowercase from '../../converted-json-files/transliterated.lowercase.json';
 
 // Allow for declaration merging
 export interface Verse {
