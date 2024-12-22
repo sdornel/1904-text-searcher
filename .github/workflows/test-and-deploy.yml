@@ -1,5 +1,3 @@
-# https://github.com/actions/deploy-pages
-
 name: Run Tests and Deploy
 
 on:
