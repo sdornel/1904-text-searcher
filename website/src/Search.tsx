@@ -25,6 +25,11 @@ export const Search = ({ handleSearch, handleBookChange }: SearchProps) => {
     handleBookChange(selectedBook);
   };
 
+  const reset = (): void => {
+    handleSearch('');
+    handleBookChange('');
+  }
+
   const newTestamentBooks = {
     mat: 'Matthew',
     mar: 'Mark',
@@ -56,22 +61,35 @@ export const Search = ({ handleSearch, handleBookChange }: SearchProps) => {
   } as const;  
 
   return (
-    <form onSubmit={submit}>
-      <input
-        type="text"
-        placeholder="Enter search query"
-        value={query}
-        onChange={handleInputChange}
-      />
-      <select value={selectedBook} onChange={handleDropdownChange}>
-        <option value=''>Select a Book</option>
-        {Object.entries(newTestamentBooks).map(([key, name]) => (
-          <option key={key} value={key}>
-            {name}
-          </option>
-        ))}
-      </select>
-      <button type="submit">Search</button>
-    </form>
+    <>
+      <form onSubmit={submit}>
+        <input
+          type="text"
+          placeholder="Enter search query"
+          value={query}
+          onChange={handleInputChange}
+        />
+        <select value={selectedBook} onChange={handleDropdownChange}>
+          <option value=''>Select a Book</option>
+          {Object.entries(newTestamentBooks).map(([key, name]) => (
+            <option key={key} value={key}>
+              {name}
+            </option>
+          ))}
+        </select>
+        <button type="submit">Search</button>
+      </form>
+      <br/>
+      <span 
+        onClick={reset}
+        style={{
+          color: 'blue',
+          textDecoration: 'underline',
+          cursor: 'pointer'
+        }}
+      >
+        Reset
+      </span>
+    </>
   );
 };

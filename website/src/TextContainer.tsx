@@ -9,14 +9,26 @@ type TextContainerProps = {
 export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps) => {
   console.log('renderText');
   const [filteredData, setFilteredData] = useState(Data.getInstance().transliteratedLowercase);
-
+  const [instances, setInstances] = useState(0);
   // TODO:
   // create options box with all the books
   // add way to filter book by selecting from options box
-  // add number of times chosen query was found in the text
+  // ^ need to be able to select multiple books at once
+  // need the found query to be highlighted red
+  // ^ https://blog.logrocket.com/using-dangerouslysetinnerhtml-react-application/
+  // ^ use dangerouslysetinnerhtml with warnings
+  // enter key needs to work after setting a dropdown value
+  // add copy button to copy search results
+  // unit tests
+  // CICD pipeline
+  // branch protections
+
+  // later TODO
+  // have regex search that can find "ego" + random text + "eimi" (difficult to do, potential security vulnerability)
+  // ^ maybe multi word search with dynamically number of search fields
   useEffect((): void => {
     const allBooks: TransliteratedData = Data.getInstance().transliteratedLowercase;
-
+    let foundInstances = 0;
     // Hashmap would be faster but there are only 27 entries
     const filtered = allBooks
     .filter((book) => {
@@ -33,12 +45,16 @@ export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps)
           verses: chapter.verses.filter((verse) => {
             const normalizedVerseText = normalizeText(verse.text.toLowerCase());
             const normalizedSearchInput = normalizeText(searchInput.toLowerCase());
-          
-            return normalizedVerseText.includes(normalizedSearchInput);
+
+            if (normalizedVerseText.includes(normalizedSearchInput) && normalizedSearchInput.length > 0) {
+              foundInstances++;
+            }
+              return normalizedVerseText.includes(normalizedSearchInput);
           }),
         })).filter((chapter) => chapter.verses.length > 0),
     })).filter((book) => book.chapters.length > 0);
     setFilteredData(filtered);
+    setInstances(foundInstances);
   }, [searchInput, selectedBook]);
 
   // Documentation for text normalization https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize
@@ -81,6 +97,7 @@ export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps)
 
   return (
     <div>
+      {instances > 0 ? <span>Found {instances} instances</span> : null}
       {filteredData.map((book: Book, bookIndex: number) => (
         <div key={bookIndex}>
           <h2>{displayEntireBookName(book.book_name)}</h2>
