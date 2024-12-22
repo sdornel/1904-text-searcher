@@ -17,11 +17,9 @@ export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps)
   // need the found query to be highlighted red
   // ^ https://blog.logrocket.com/using-dangerouslysetinnerhtml-react-application/
   // ^ use dangerouslysetinnerhtml with warnings
-  // enter key needs to work after setting a dropdown value
   // add copy button to copy search results
   // unit tests
   // CICD pipeline
-  // branch protections
 
   // later TODO
   // have regex search that can find "ego" + random text + "eimi" (difficult to do, potential security vulnerability)
