@@ -19,7 +19,6 @@ export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps)
   // ^ https://blog.logrocket.com/using-dangerouslysetinnerhtml-react-application/
   // ^ use dangerouslysetinnerhtml with warnings
   // add copy button to copy search results
-  // unit tests
   // CICD pipeline
 
   // later TODO
