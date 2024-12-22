@@ -11,7 +11,6 @@ export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps)
   const [filteredData, setFilteredData] = useState(Data.getInstance().transliteratedLowercase);
   const [instances, setInstances] = useState(0);
   // TODO:
-  // make reset button for dropdown filter
   // create options box with all the books
   // add way to filter book by selecting from options box
   // ^ need to be able to select multiple books at once
