@@ -7,6 +7,8 @@ To get this app running:
 3) npm install
 4) npm run dev
 
+If typescript is too strict you can modify the tsconfig.app.json to be less strict.
+
 This repository contains copies of the 1904 Patriarchal text. It uses texts found in https://github.com/bibleproofs/1904/.
 It serves these purposes:
 - 1) Allows the public to easily access the 1904 Patriarchal text
