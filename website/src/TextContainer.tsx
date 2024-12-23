@@ -25,7 +25,7 @@ export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps)
   useEffect((): void => {
     const allBooks: TransliteratedData = Data.getInstance().transliteratedLowercase;
     let foundInstances = 0;
-    // setInstances(0);
+
     // Hashmap would be faster but there are only 27 entries
     const filtered = allBooks
     .filter((book) => {
