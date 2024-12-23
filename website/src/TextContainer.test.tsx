@@ -1,9 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import { TextContainer } from './TextContainer';
 import userEvent from '@testing-library/user-event';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-// import userEvent from '@testing-library/user-event';
 
 jest.mock('./data/data', () => ({
   __esModule: true,
