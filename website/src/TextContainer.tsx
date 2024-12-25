@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import Data, { Book, Chapter, TransliteratedData, Verse } from './data/data';
 import { NewTestamentBooks } from './data/books';
+import parse from 'html-react-parser';
 
 type TextContainerProps = {
   searchInput: string;
@@ -10,14 +11,11 @@ type TextContainerProps = {
 export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps) => {
   console.log('renderText');
   const [filteredData, setFilteredData] = useState(Data.getInstance().transliteratedLowercase);
-  const [instances, setInstances] = useState(0);
+  const [instances, setInstances] = useState<number>(0);
   // TODO:
   // create options box with all the books
   // add way to filter book by selecting from options box
   // ^ need to be able to select multiple books at once
-  // need the found query to be highlighted red
-  // ^ https://blog.logrocket.com/using-dangerouslysetinnerhtml-react-application/
-  // ^ use dangerouslysetinnerhtml with warnings
 
   // Finish writing test cases for this file. Mostly done but a few edge cases not covered
 
@@ -27,6 +25,7 @@ export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps)
   useEffect((): void => {
     const allBooks: TransliteratedData = Data.getInstance().transliteratedLowercase;
     let foundInstances = 0;
+
     // Hashmap would be faster but there are only 27 entries
     const filtered = allBooks
     .filter((book) => {
@@ -89,6 +88,37 @@ export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps)
     }
   }
 
+  const highlightText = (text: string, query: string): string => {
+    if (!query) {
+      return text;
+    }
+  
+    const normalizedQuery = query.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const normalizedText = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  
+    // Check if the normalized query exists in normalized text
+    const regex = new RegExp(normalizedQuery, 'gi');
+    let match;
+    let result = '';
+    let lastIndex = 0;
+  
+    // Match normalized text but replace in the original text
+    while ((match = regex.exec(normalizedText)) !== null) {
+      const startIndex = match.index;
+      const endIndex = startIndex + match[0].length;
+  
+      // Map indices back to the original text
+      result += text.slice(lastIndex, startIndex); // Add text before the match
+      result += `<span style="color: red; font-weight: bold;">${text.slice(startIndex, endIndex)}</span>`; // Highlight match
+      lastIndex = endIndex;
+    }
+  
+    // Add any remaining text after the last match
+    result += text.slice(lastIndex);
+  
+    return result;
+  };
+
   return (
     <div>
       {instances > 0 ? <span>Found {instances} instance(s)</span> : null}
@@ -104,7 +134,8 @@ export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps)
               <h3>{chapter.number}</h3>
               {chapter.verses.map((verse: Verse, verseIndex: number) => (
                 <p key={verseIndex}>
-                  <span>{verse.number}:</span> {verse.text}
+                  <span>{verse.number}: </span>
+                  {parse(highlightText(verse.text, searchInput))}
                 </p>
               ))}
             </div>
