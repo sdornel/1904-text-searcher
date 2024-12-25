@@ -12,6 +12,7 @@ It serves these purposes:
 - 1) Allows the public to easily access the 1904 Patriarchal text
 - 2) Search the 1904 Patriarchal text for specific words/phrases
 - 3) Through various patterns that exist in the text show the Holy Scriptures are divinely inspired
+     ^ WIP needs to be updated
 
 To view the text in its entirety:
 - cat transliterated.lowercase.txt
