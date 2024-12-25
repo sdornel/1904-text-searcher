@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './App.css';
 import { NewTestamentBooks } from './data/books';
 
 type SearchProps = {
@@ -8,7 +7,6 @@ type SearchProps = {
 };
 
 export const Search = ({ handleSearch, handleBookChange }: SearchProps) => {
-  console.log('renderSearch');
   const [query, setQuery] = useState('');
   const [selectedBook, setSelectedBook] = useState('');
 
@@ -35,42 +33,46 @@ export const Search = ({ handleSearch, handleBookChange }: SearchProps) => {
   const reset = (): void => {
     handleSearch('');
     handleBookChange('');
-  }
+  };
 
   return (
-    <>
-      <form onSubmit={submit}>
-        <input
-          type="text"
-          placeholder="Enter search query"
-          value={query}
-          onChange={handleInputChange}
-        />
-        <select
-          value={selectedBook}
-          onChange={handleDropdownChange}
-          onKeyDown={handleDropdownChange}
-        >
-          <option value=''>Select a Book</option>
-          {Object.entries(NewTestamentBooks).map(([key, name]) => (
-            <option key={key} value={key}>
-              {name}
-            </option>
-          ))}
-        </select>
-        <button type="submit">Search</button>
-      </form>
-      <br/>
-      <span 
-        onClick={reset}
-        style={{
-          color: 'blue',
-          textDecoration: 'underline',
-          cursor: 'pointer'
-        }}
+    <form onSubmit={submit} className="p-4 bg-gray-50 border rounded-md shadow-md flex flex-col gap-4">
+      <h2 className="text-xl font-semibold">Search the New Testament</h2>
+      <input
+        type="text"
+        placeholder="Enter search query"
+        value={query}
+        onChange={handleInputChange}
+        className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <select
+        value={selectedBook}
+        onChange={handleDropdownChange}
+        onKeyDown={handleDropdownChange}
+        className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
-        Reset
-      </span>
-    </>
+        <option value=''>Select a Book</option>
+        {Object.entries(NewTestamentBooks).map(([key, name]) => (
+          <option key={key} value={key}>
+            {name}
+          </option>
+        ))}
+      </select>
+      <div className="flex gap-4">
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+        >
+          Search
+        </button>
+        <button
+          type="button"
+          onClick={reset}
+          className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 transition"
+        >
+          Reset
+        </button>
+      </div>
+    </form>
   );
 };

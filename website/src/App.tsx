@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import './App.css'
+import './App.css';
 import { Search } from './Search.tsx';
 import { TextContainer } from './TextContainer.tsx';
+import BookList from './BookList.tsx';
+import './index.css';
 
 function App() {
   console.log('renderApp');
@@ -17,11 +19,15 @@ function App() {
   };
 
   return (
-    <>
-      <Search handleSearch={handleSearch} handleBookChange={handleBookChange}/>
-      <p>Search Query: {searchInput}</p>
-      <TextContainer searchInput={searchInput} selectedBook={selectedBook} />
-    </>
+    <div className="h-screen flex gap-4 p-4">
+      <div className="flex-1">
+        <Search handleSearch={handleSearch} handleBookChange={handleBookChange} />
+        <TextContainer searchInput={searchInput} selectedBook={selectedBook} />
+      </div>
+      <div className="w-1/4 border-l border-gray-300 p-4 overflow-y-auto bg-gray-50">
+        <BookList />
+      </div>
+    </div>
   )
 }
 
