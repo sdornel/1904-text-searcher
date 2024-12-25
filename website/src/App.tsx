@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './App.css';
 import { Search } from './Search.tsx';
 import { TextContainer } from './TextContainer.tsx';
 import BookList from './BookList.tsx';

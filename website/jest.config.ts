@@ -2,6 +2,7 @@ import { Config } from 'jest';
 
 const config: Config = {
   testEnvironment: 'jsdom',
+  
   moduleFileExtensions: ['js', 'ts', 'tsx', 'json', 'node'],
   transform: {
     '^.+\\.(t|j)sx?$': [
@@ -13,7 +14,7 @@ const config: Config = {
     ]
   },
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1'
+    "\\.(css|less)$": "<rootDir>/node_modules/tailwindcss",
   },
   transformIgnorePatterns: [
     'node_modules/(?!(.*\\.mjs$))'
