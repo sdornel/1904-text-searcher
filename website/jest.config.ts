@@ -2,7 +2,6 @@ import { Config } from 'jest';
 
 const config: Config = {
   testEnvironment: 'jsdom',
-  
   moduleFileExtensions: ['js', 'ts', 'tsx', 'json', 'node'],
   transform: {
     '^.+\\.(t|j)sx?$': [
