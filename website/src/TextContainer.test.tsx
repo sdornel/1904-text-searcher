@@ -43,7 +43,7 @@ afterEach(() => {
 
 describe('TextContainer', () => {
   it('renders with no search input', () => {
-    render(<TextContainer searchInput="" selectedBook="" />);
+    render(<TextContainer searchInput="" selectedBooks={[]} />);
     expect(screen.getByText('Matthew')).toBeInTheDocument();
     expect(screen.getByText('Mark')).toBeInTheDocument();
     expect(screen.getByText('Test Verse ērōdēs')).toBeInTheDocument();
@@ -54,28 +54,28 @@ describe('TextContainer', () => {
   });
 
   it('displays found instances', async () => {
-    render(<TextContainer searchInput="Test" selectedBook="" />);
+    render(<TextContainer searchInput="Test" selectedBooks={[]} />);
     expect(screen.getByText('Found 2 instance(s)')).toBeInTheDocument();
   });
 
   it('"e" includes diacriticals when searching', () => {
-    render(<TextContainer searchInput="erodes" selectedBook="" />);
+    render(<TextContainer searchInput="erodes" selectedBooks={[]} />);
     expect(screen.getByText('Found 1 instance(s)')).toBeInTheDocument();
   });
 
   it('"o" includes diacriticals when searching', () => {
-    render(<TextContainer searchInput="erodes" selectedBook="" />);
+    render(<TextContainer searchInput="erodes" selectedBooks={[]} />);
     expect(screen.getByText('Found 1 instance(s)')).toBeInTheDocument();
   });
 
   it('does not return results for unmatched search input', () => {
-    render(<TextContainer searchInput="asdf" selectedBook="" />);
+    render(<TextContainer searchInput="asdf" selectedBooks={[]} />);
     expect(screen.queryByText('Found')).toBeNull();
     expect(screen.queryByText('Matthew')).toBeNull();
   });
 
   it('search query is case insensitive', () => {
-    render(<TextContainer searchInput="ZZZ" selectedBook="" />);
+    render(<TextContainer searchInput="ZZZ" selectedBooks={[]} />);
     expect(screen.queryByText('Found 0 instance(s)')).toBeNull();
   })
 
@@ -85,7 +85,7 @@ describe('TextContainer', () => {
         writeText: jest.fn(),
       },
     });
-    render(<TextContainer searchInput="Test Verse" selectedBook="mat" />);
+    render(<TextContainer searchInput="Test Verse" selectedBooks={["mat"]} />);
     await screen.findByText('Matthew');
   
     const copyButton = screen.getByText('Copy Search Results');
@@ -99,7 +99,7 @@ describe('TextContainer', () => {
   });
 
   it('displays no results when searchInput does not match', () => {
-    render(<TextContainer searchInput="randomtext" selectedBook="" />);
+    render(<TextContainer searchInput="randomtext" selectedBooks={[]} />);
 
     expect(screen.queryByText('Found')).not.toBeInTheDocument();
     expect(screen.queryByText('Matthew')).not.toBeInTheDocument();
@@ -107,14 +107,14 @@ describe('TextContainer', () => {
   });
 
   it('filters by selected book correctly', () => {
-    render(<TextContainer searchInput="Test" selectedBook="mar" />);
+    render(<TextContainer searchInput="Test" selectedBooks={["mar"]} />);
     expect(screen.getByText('Found 1 instance(s)')).toBeInTheDocument();
     expect(screen.getByText('Mark')).toBeInTheDocument();
     expect(screen.queryByText('Matthew')).toBeNull();
   });
 
   it('renders correctly when there are no matches', () => {
-    render(<TextContainer searchInput="nomatch" selectedBook="" />);
+    render(<TextContainer searchInput="nomatch" selectedBooks={[]} />);
     expect(screen.queryByText('Found')).toBeNull();
     expect(screen.queryByText('Matthew')).toBeNull();
     expect(screen.queryByText('Mark')).toBeNull();
