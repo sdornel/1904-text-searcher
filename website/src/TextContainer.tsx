@@ -13,15 +13,7 @@ export const TextContainer = ({ searchInput, selectedBooks }: TextContainerProps
   const [filteredData, setFilteredData] = useState(Data.getInstance().transliteratedLowercase);
   const [instances, setInstances] = useState<number>(0);
   // TODO:
-  // add way to filter book by selecting from options box
-  // ^ need to be able to select multiple books at once
-  // replace dropdown items with checkboxes (see ^)
-  // ensure side panel item are selectable
 
-  // Finish writing test cases for this file. Mostly done but a few edge cases not covered
-  // more unit tests
-
-  // later TODO
   // have regex search that can find "ego" + random text + "eimi" (difficult to do, potential security vulnerability)
   // ^ maybe multi word search with dynamic number of search fields
   useEffect((): void => {
