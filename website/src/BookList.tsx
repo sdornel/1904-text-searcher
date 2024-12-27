@@ -3,7 +3,7 @@ import { NewTestamentBooks } from './data/books';
 
 interface BookListProps {
   onBookSelect: (book: keyof typeof NewTestamentBooks) => void;
-  selectedBooks: Array<string>; // Array of selected books
+  selectedBooks: Array<string>;
 }
 
 function BookList({ onBookSelect, selectedBooks }: BookListProps) {
