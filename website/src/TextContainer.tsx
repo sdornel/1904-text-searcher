@@ -6,9 +6,9 @@ import parse from 'html-react-parser';
 
 type TextContainerProps = {
   searchInput: string;
-  selectedBook: string;
+  selectedBooks: Array<string>;
 }
-export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps) => {
+export const TextContainer = ({ searchInput, selectedBooks }: TextContainerProps) => {
   console.log('renderText');
   const [filteredData, setFilteredData] = useState(Data.getInstance().transliteratedLowercase);
   const [instances, setInstances] = useState<number>(0);
@@ -31,7 +31,7 @@ export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps)
     // Hashmap would be faster but there are only 27 entries
     const filtered = allBooks
     .filter((book) => {
-      if (selectedBook && book.book_name !== selectedBook) {
+      if (selectedBooks.length > 0 && !selectedBooks.includes(book.book_name)) {
         return false;
       }
       return true;
@@ -54,7 +54,7 @@ export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps)
     })).filter((book) => book.chapters.length > 0);
     setFilteredData(filtered);
     setInstances(foundInstances);
-  }, [searchInput, selectedBook]);
+  }, [searchInput, selectedBooks]);
 
   // Documentation for text normalization https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize
   const normalizeText = (text: string): string => {
@@ -122,7 +122,7 @@ export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps)
   };
 
   return (
-    <div className="p-4 bg-white border rounded-md shadow-md max-h-[70vh] overflow-y-auto">
+    <div className="p-4 bg-white border rounded-md shadow-md max-h-[74vh] overflow-y-auto">
       {instances > 0 && (
         <span className="block mb-4 text-green-600 font-medium">
           Found {instances} instance(s)
@@ -139,9 +139,9 @@ export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps)
           </h2>
           {book.chapters.map((chapter: Chapter, chapterIndex: number) => (
             <div key={chapterIndex} className="mb-4">
-              <h3 className="text-lg font-medium text-gray-700">{chapter.number}</h3>
+              <h3 className="text-lg font-medium">{chapter.number}</h3>
               {chapter.verses.map((verse: Verse, verseIndex: number) => (
-                <p key={verseIndex} className="text-gray-600">
+                <p key={verseIndex}>
                   <span >{verse.number}: </span>
                   {parse(highlightText(verse.text, searchInput))}
                 </p>

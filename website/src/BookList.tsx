@@ -1,23 +1,29 @@
-import { useState } from 'react';
 import './App.css';
+import { NewTestamentBooks } from './data/books';
 
-function BookList() {
+interface BookListProps {
+  onBookSelect: (book: keyof typeof NewTestamentBooks) => void;
+  selectedBooks: Array<string>; // Array of selected books
+}
+
+function BookList({ onBookSelect, selectedBooks }: BookListProps) {
   console.log('renderBookList');
-  
-  const [books] = useState([
-    'Matthew', 'Mark', 'Luke', 'John', 'Acts of the Holy Apostles', 'Romans', '1 Corinthians', '2 Corinthians',
-    'Galatians', 'Ephesians', 'Philippians', 'Colossians', '1 Thessalonians', '2 Thessalonians',
-    '1 Timothy', '2 Timothy', 'Titus', 'Philemon', 'Hebrews', 'James', '1 Peter', '2 Peter',
-    '1 John', '2 John', '3 John', 'Jude', 'Apocalypsis'
-  ]);
+
+  const books = Object.keys(NewTestamentBooks) as Array<keyof typeof NewTestamentBooks>;
 
   return (
     <div>
-      <h2 className="text-xl font-semibold mb-2">New Testament Books</h2>
+      <h2 className="text-xl font-semibold mb-2">Select book(s)</h2>
       <ul className="space-y-1">
-        {books.map((book, index) => (
-          <li key={index} className="hover:text-blue-500 cursor-pointer">
-            {book}
+        {books.map((key) => (
+          <li 
+            key={key} 
+            onClick={() => onBookSelect(key)} 
+            className={`hover:text-blue-500 cursor-pointer p-1 ${
+              selectedBooks.includes(key) ? 'bg-blue-100 font-bold' : ''
+            }`}
+          >
+            {NewTestamentBooks[key]}
           </li>
         ))}
       </ul>
