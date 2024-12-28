@@ -1,4 +1,4 @@
-import TransliteratedLowercase from '../../converted-json-files/transliterated.lowercase.json';
+import TransliteratedLowercase from '../../converted-json-files/transliterated_lowercase.json';
 
 // Allow for declaration merging
 export interface Verse {
@@ -20,6 +20,7 @@ export type TransliteratedData = Array<Book>;
 
 export default class Data {
     private static instance: Data;
+    chosenText: TransliteratedData = TransliteratedLowercase;
 
     private constructor() {} // Prevent direct instantiation
   
@@ -33,4 +34,12 @@ export default class Data {
     get transliteratedLowercase(): TransliteratedData {
       return TransliteratedLowercase;
     }
+
+    // get greekLowercase(): TransliteratedData {
+    //   return;
+    // }
+
+    // get greek() : TransliteratedData {
+    //   return;
+    // }
 }
