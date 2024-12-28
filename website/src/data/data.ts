@@ -1,5 +1,5 @@
 import TransliteratedLowercase from '../../converted-json-files/transliterated_lowercase.json';
-import GreekLowercase from '../../converted-json-files/greek_and_transliterated_lowercase.json';
+import GreekAndLowercaseTransliteration from '../../converted-json-files/greek_and_transliterated_lowercase.json';
 import Greek from '../../converted-json-files/greek.json';
 
 // Allow for declaration merging
@@ -37,8 +37,8 @@ export default class Data {
     switch (text) {
       case 'TransliteratedLowercase':
         return this.transliteratedLowercase;
-      case 'GreekLowercase':
-        return this.greekLowercase;
+      case 'GreekAndLowercaseTransliteration':
+        return this.greekAndLowercaseTransliteration;
       case 'Greek':
         return this.greek;
       default:
@@ -51,8 +51,8 @@ export default class Data {
     return TransliteratedLowercase;
   }
 
-  get greekLowercase(): TransliteratedData {
-    return GreekLowercase;
+  get greekAndLowercaseTransliteration(): TransliteratedData {
+    return GreekAndLowercaseTransliteration;
   }
 
   get greek() : TransliteratedData {

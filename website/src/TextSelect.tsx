@@ -13,7 +13,7 @@ export const TextSelect = ({ handleTextChange }: TextSelectProps) => {
         className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         <option value="TransliteratedLowercase">Transliterated Lowercase</option>
-        <option value="GreekLowercase">Greek Lowercase</option>
+        <option value="GreekAndLowercaseTransliteration">Greek and Lowercase Transliteration</option>
         <option value="Greek">Greek</option>
       </select>
     </div>
