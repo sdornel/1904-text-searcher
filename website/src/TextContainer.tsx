@@ -7,8 +7,9 @@ import parse from 'html-react-parser';
 type TextContainerProps = {
   searchInput: string;
   selectedBooks: Array<string>;
+  selectedText: string;
 }
-export const TextContainer = ({ searchInput, selectedBooks }: TextContainerProps) => {
+export const TextContainer = ({ searchInput, selectedBooks, selectedText }: TextContainerProps) => {
   console.log('renderText');
   const [filteredData, setFilteredData] = useState(Data.getInstance().transliteratedLowercase);
   const [instances, setInstances] = useState<number>(0);
@@ -17,7 +18,7 @@ export const TextContainer = ({ searchInput, selectedBooks }: TextContainerProps
   // have regex search that can find "ego" + random text + "eimi" (difficult to do, potential security vulnerability)
   // ^ maybe multi word search with dynamic number of search fields
   useEffect((): void => {
-    const allBooks: TransliteratedData = Data.getInstance().chosenText;
+    const allBooks: TransliteratedData = Data.getInstance().textSelector(selectedText);
     let foundInstances = 0;
 
     // Hashmap would be faster but there are only 27 entries
@@ -46,7 +47,7 @@ export const TextContainer = ({ searchInput, selectedBooks }: TextContainerProps
     })).filter((book) => book.chapters.length > 0);
     setFilteredData(filtered);
     setInstances(foundInstances);
-  }, [searchInput, selectedBooks]);
+  }, [searchInput, selectedBooks, selectedText]);
 
   // Documentation for text normalization https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize
   const normalizeText = (text: string): string => {
