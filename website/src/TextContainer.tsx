@@ -3,6 +3,7 @@ import './App.css'
 import Data, { Book, Chapter, TransliteratedData, Verse } from './data/data';
 import { NewTestamentBooks } from './data/books';
 import parse from 'html-react-parser';
+import { displayEntireBookName } from './helpers/helpers';
 
 type TextContainerProps = {
   searchInput: string;
@@ -52,10 +53,6 @@ export const TextContainer = ({ searchInput, selectedBooks, selectedText }: Text
   // Documentation for text normalization https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize
   const normalizeText = (text: string): string => {
     return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  }
-
-  const displayEntireBookName = (key: keyof typeof NewTestamentBooks) => {
-    return NewTestamentBooks[key];
   }
 
   const copyToClipboard = async () => {
