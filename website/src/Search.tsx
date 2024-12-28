@@ -22,7 +22,6 @@ export const Search = ({ handleSearch }: SearchProps) => {
 
   return (
     <form onSubmit={submit} className="p-4 bg-gray-50 border rounded-md shadow-md flex flex-col gap-4">
-      <h2 className="text-xl font-semibold">Search the New Testament</h2>
       <input
         type="text"
         placeholder="Enter search query"
