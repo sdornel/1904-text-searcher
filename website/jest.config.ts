@@ -13,7 +13,7 @@ const config: Config = {
     ]
   },
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1'
+    "\\.(css|less)$": "<rootDir>/node_modules/tailwindcss",
   },
   transformIgnorePatterns: [
     'node_modules/(?!(.*\\.mjs$))'

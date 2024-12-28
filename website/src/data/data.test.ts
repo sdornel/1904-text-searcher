@@ -1,5 +1,5 @@
 import Data from './data';
-import TransliteratedLowercase from '../../converted-json-files/transliterated.lowercase.json';
+import TransliteratedLowercase from '../../converted-json-files/transliterated_lowercase.json';
 
 describe('Data Singleton Class', () => {
   it('should return the same instance', () => {

@@ -6,20 +6,14 @@ import parse from 'html-react-parser';
 
 type TextContainerProps = {
   searchInput: string;
-  selectedBook: string;
+  selectedBooks: Array<string>;
 }
-export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps) => {
+export const TextContainer = ({ searchInput, selectedBooks }: TextContainerProps) => {
   console.log('renderText');
   const [filteredData, setFilteredData] = useState(Data.getInstance().transliteratedLowercase);
   const [instances, setInstances] = useState<number>(0);
   // TODO:
-  // create options box with all the books
-  // add way to filter book by selecting from options box
-  // ^ need to be able to select multiple books at once
 
-  // Finish writing test cases for this file. Mostly done but a few edge cases not covered
-
-  // later TODO
   // have regex search that can find "ego" + random text + "eimi" (difficult to do, potential security vulnerability)
   // ^ maybe multi word search with dynamic number of search fields
   useEffect((): void => {
@@ -29,7 +23,7 @@ export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps)
     // Hashmap would be faster but there are only 27 entries
     const filtered = allBooks
     .filter((book) => {
-      if (selectedBook && book.book_name !== selectedBook) {
+      if (selectedBooks.length > 0 && !selectedBooks.includes(book.book_name)) {
         return false;
       }
       return true;
@@ -52,7 +46,7 @@ export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps)
     })).filter((book) => book.chapters.length > 0);
     setFilteredData(filtered);
     setInstances(foundInstances);
-  }, [searchInput, selectedBook]);
+  }, [searchInput, selectedBooks]);
 
   // Documentation for text normalization https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize
   const normalizeText = (text: string): string => {
@@ -120,21 +114,27 @@ export const TextContainer = ({ searchInput, selectedBook }: TextContainerProps)
   };
 
   return (
-    <div>
-      {instances > 0 ? <span>Found {instances} instance(s)</span> : null}
+    <div className="p-4 bg-white border rounded-md shadow-md max-h-[74vh] overflow-y-auto">
+      {instances > 0 && (
+        <span className="block mb-4 text-green-600 font-medium">
+          Found {instances} instance(s)
+        </span>
+      )}
       <br/>
-      <button onClick={copyToClipboard} style={{ margin: '10px 0' }}>
+      <button onClick={copyToClipboard} className="mb-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition">
         Copy Search Results
       </button>
       {filteredData.map((book: Book, bookIndex: number) => (
-        <div key={bookIndex}>
-          <h2>{displayEntireBookName(book.book_name as keyof typeof NewTestamentBooks)}</h2>
+        <div key={bookIndex} className="mb-6">
+          <h2 className="text-xl font-semibold text-gray-800 mb-2">
+            {displayEntireBookName(book.book_name as keyof typeof NewTestamentBooks)}
+          </h2>
           {book.chapters.map((chapter: Chapter, chapterIndex: number) => (
-            <div key={chapterIndex}>
-              <h3>{chapter.number}</h3>
+            <div key={chapterIndex} className="mb-4">
+              <h3 className="text-lg font-medium">{chapter.number}</h3>
               {chapter.verses.map((verse: Verse, verseIndex: number) => (
                 <p key={verseIndex}>
-                  <span>{verse.number}: </span>
+                  <span >{verse.number}: </span>
                   {parse(highlightText(verse.text, searchInput))}
                 </p>
               ))}
