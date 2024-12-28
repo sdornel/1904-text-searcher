@@ -28,9 +28,14 @@ function App() {
   return (
     <div className="h-screen flex gap-4 p-4">
       <div className="flex-1 flex flex-col border rounded-md shadow-md overflow-hidden">
-        <TextSelect handleTextChange={handleTextChange}/>
-        <Search handleSearch={handleSearch} />
-        <TextContainer searchInput={searchInput} selectedBooks={selectedBooks} selectedText={selectedText} />
+        <div className="flex items-center gap-4 p-4 border-b bg-gray-50">
+          <Search handleSearch={handleSearch} handleTextChange={handleTextChange} />
+        </div>
+        <TextContainer 
+          searchInput={searchInput} 
+          selectedBooks={selectedBooks} 
+          selectedText={selectedText} 
+        />
       </div>
 
       <div className="w-1/4 flex flex-col border bg-gray-100 rounded-md shadow-md overflow-hidden">
