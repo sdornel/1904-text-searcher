@@ -7,7 +7,7 @@ interface BookListProps {
   selectedBooks: Array<string>;
 }
 
-function BookList({ onBookSelect, selectedBooks }: BookListProps) {
+export const BookList = ({ onBookSelect, selectedBooks }: BookListProps) => {
   const books = Object.keys(NewTestamentBooks) as Array<keyof typeof NewTestamentBooks>;
 
   return (
@@ -29,5 +29,3 @@ function BookList({ onBookSelect, selectedBooks }: BookListProps) {
     </div>
   );
 }
-
-export default BookList;
