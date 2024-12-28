@@ -33,22 +33,20 @@ export default class Data {
     return Data.instance;
   }
 
-  textSelector(text: string): void {
+  textSelector(text: string): TransliteratedData {
     switch (text) {
       case 'TransliteratedLowercase':
-        this.chosenText = TransliteratedLowercase;
-        break;
+        return this.transliteratedLowercase;
       case 'GreekLowercase':
-        this.chosenText = GreekLowercase;
-        break;
+        return this.greekLowercase;
       case 'Greek':
-        this.chosenText = Greek;
-        break;
+        return this.greek;
       default:
         throw new Error('Invalid text');
     }
   }
 
+  // getters are overkill at this point
   get transliteratedLowercase(): TransliteratedData {
     return TransliteratedLowercase;
   }
