@@ -1,4 +1,5 @@
 import TransliteratedLowercase from '../../converted-json-files/transliterated_lowercase.json';
+import GreekLowercase from '../../converted-json-files/greek_lowercase.json'
 
 // Allow for declaration merging
 export interface Verse {
@@ -39,7 +40,7 @@ export default class Data {
     //   return;
     // }
 
-    // get greek() : TransliteratedData {
-    //   return;
-    // }
+    get greekLowercase() : TransliteratedData {
+      return GreekLowercase;
+    }
 }
