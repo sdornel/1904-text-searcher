@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Search } from './Search.tsx';
 import { TextContainer } from './TextContainer.tsx';
-import BookList from './BookList.tsx';
+import { BookList } from './BookList.tsx';
 import './index.css';
 
 function App() {

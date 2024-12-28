@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import BookList from './BookList';
+import { BookList } from './BookList';
 import { NewTestamentBooks } from './data/books';
 
 describe('BookList Component', () => {
