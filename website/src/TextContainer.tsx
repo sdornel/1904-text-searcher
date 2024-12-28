@@ -17,7 +17,7 @@ export const TextContainer = ({ searchInput, selectedBooks }: TextContainerProps
   // have regex search that can find "ego" + random text + "eimi" (difficult to do, potential security vulnerability)
   // ^ maybe multi word search with dynamic number of search fields
   useEffect((): void => {
-    const allBooks: TransliteratedData = Data.getInstance().transliteratedLowercase;
+    const allBooks: TransliteratedData = Data.getInstance().chosenText;
     let foundInstances = 0;
 
     // Hashmap would be faster but there are only 27 entries
