@@ -3,7 +3,6 @@ import { Search } from './Search.tsx';
 import { TextContainer } from './TextContainer.tsx';
 import BookList from './BookList.tsx';
 import './index.css';
-import { TextSelect } from './TextSelect.tsx';
 
 function App() {
   console.log('renderApp');
