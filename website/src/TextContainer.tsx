@@ -115,7 +115,7 @@ export const TextContainer = ({ searchInput, selectedBooks, selectedText }: Text
   };
 
   return (
-    <div className="p-4 bg-white border rounded-md shadow-md max-h-[74vh] overflow-y-auto">
+    <div className="p-4 bg-white border rounded-md shadow-md max-h-[84vh] overflow-y-auto">
       {instances > 0 && (
         <span className="block mb-4 text-green-600 font-medium">
           Found {instances} instance(s)
