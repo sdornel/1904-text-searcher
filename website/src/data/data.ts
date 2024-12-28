@@ -1,5 +1,5 @@
 import TransliteratedLowercase from '../../converted-json-files/transliterated_lowercase.json';
-import GreekLowercase from '../../converted-json-files/greek_lowercase.json';
+import GreekLowercase from '../../converted-json-files/greek_and_transliterated_lowercase.json';
 import Greek from '../../converted-json-files/greek.json';
 
 // Allow for declaration merging
