@@ -40,7 +40,7 @@ export const TextContainer = ({ searchInput, selectedBooks, selectedText }: Text
             const normalizedSearchInput = normalizeText(searchInput.toLowerCase());
 
             if (normalizedVerseText.includes(normalizedSearchInput) && normalizedSearchInput.length > 0) {
-              foundInstances++;
+              foundInstances += countInstances(normalizedVerseText, normalizedSearchInput);
             }
               return normalizedVerseText.includes(normalizedSearchInput);
           }),
@@ -54,6 +54,16 @@ export const TextContainer = ({ searchInput, selectedBooks, selectedText }: Text
   const normalizeText = (text: string): string => {
     return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   }
+
+  const countInstances = (normalizedVerseText: string, normalizedSearchInput: string): number => {
+    let foundInstances = 0;
+    normalizedVerseText.split(' ').forEach(word => {
+      if (word === normalizedSearchInput) {
+        foundInstances++;
+      }
+    })
+    return foundInstances;
+  };
 
   const copyToClipboard = async () => {
     const textToCopy = filteredData
