@@ -2,9 +2,10 @@ import { useState } from 'react';
 
 type SearchProps = {
   handleSearch: (query: string) => void;
+  handleTextChange: (text: string) => void;
 };
 
-export const Search = ({ handleSearch }: SearchProps) => {
+export const Search = ({ handleSearch, handleTextChange }: SearchProps) => {
   const [query, setQuery] = useState('');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -21,15 +22,28 @@ export const Search = ({ handleSearch }: SearchProps) => {
   };
 
   return (
-    <form onSubmit={submit} className="p-4 bg-gray-50 border rounded-md shadow-md flex flex-col gap-4">
-      <h2 className="text-xl font-semibold">Search the New Testament</h2>
-      <input
-        type="text"
-        placeholder="Enter search query"
-        value={query}
-        onChange={handleInputChange}
-        className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
+    <form onSubmit={submit} className="flex flex-col gap-4 w-full">
+      <div className="flex items-center gap-4">
+        <input
+          type="text"
+          placeholder="Enter search query"
+          value={query}
+          onChange={handleInputChange}
+          className="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <div className="flex items-center gap-2">
+          <select
+            id="text-selector"
+            onChange={(event: React.ChangeEvent<HTMLSelectElement>) => handleTextChange(event.target.value)}
+            className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="TransliteratedLowercase">Transliterated Lowercase</option>
+            <option value="GreekAndLowercaseTransliteration">Greek and Lowercase Transliteration</option>
+            <option value="Greek">Greek</option>
+          </select>
+        </div>
+      </div>
+
       <div className="flex gap-4">
         <button
           type="submit"

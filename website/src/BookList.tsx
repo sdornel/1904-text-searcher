@@ -1,14 +1,13 @@
 import './App.css';
 import { NewTestamentBooks } from './data/books';
+import { displayEntireBookName } from './helpers/helpers';
 
 interface BookListProps {
   onBookSelect: (book: keyof typeof NewTestamentBooks) => void;
   selectedBooks: Array<string>;
 }
 
-function BookList({ onBookSelect, selectedBooks }: BookListProps) {
-  console.log('renderBookList');
-
+export const BookList = ({ onBookSelect, selectedBooks }: BookListProps) => {
   const books = Object.keys(NewTestamentBooks) as Array<keyof typeof NewTestamentBooks>;
 
   return (
@@ -23,12 +22,10 @@ function BookList({ onBookSelect, selectedBooks }: BookListProps) {
               selectedBooks.includes(key) ? 'bg-blue-100 font-bold' : ''
             }`}
           >
-            {NewTestamentBooks[key]}
+            {displayEntireBookName(key)}
           </li>
         ))}
       </ul>
     </div>
   );
 }
-
-export default BookList;

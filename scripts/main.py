@@ -47,8 +47,8 @@ def save_json_file(data, file_path):
         json.dump(data, file, ensure_ascii=False, indent=4)
 
 def main():
-    input_file = "transliterated.lowercase.txt"
-    output_file = "transliterated.lowercase.json"
+    input_file = "../texts/greek.txt"
+    output_file = "greek.json"
 
     data = load_text_file(input_file)
 

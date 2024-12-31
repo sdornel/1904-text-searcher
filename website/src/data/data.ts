@@ -1,45 +1,61 @@
 import TransliteratedLowercase from '../../converted-json-files/transliterated_lowercase.json';
+import GreekAndLowercaseTransliteration from '../../converted-json-files/greek_and_transliterated_lowercase.json';
+import Greek from '../../converted-json-files/greek.json';
 
 // Allow for declaration merging
 export interface Verse {
-    number: number;
-    text: string;
+  number: number;
+  text: string;
 }
 
 export interface Chapter {
-    number: number;
-    verses: Array<Verse>;
+  number: number;
+  verses: Array<Verse>;
 }
 
 export interface Book {
-    book_name: string;
-    chapters: Array<Chapter>;
+  book_name: string;
+  chapters: Array<Chapter>;
 }
 
 export type TransliteratedData = Array<Book>;
 
 export default class Data {
-    private static instance: Data;
-    chosenText: TransliteratedData = TransliteratedLowercase;
+  private static instance: Data;
+  chosenText: TransliteratedData = TransliteratedLowercase;
 
-    private constructor() {} // Prevent direct instantiation
-  
-    public static getInstance(): Data {
-      if (!Data.instance) {
-        Data.instance = new Data();
-      }
-      return Data.instance;
+  private constructor() {} // Prevent direct instantiation
+
+  public static getInstance(): Data {
+    if (!Data.instance) {
+      Data.instance = new Data();
     }
-  
-    get transliteratedLowercase(): TransliteratedData {
-      return TransliteratedLowercase;
+    return Data.instance;
+  }
+
+  textSelector(text: string): TransliteratedData {
+    switch (text) {
+      case 'TransliteratedLowercase':
+        return this.transliteratedLowercase;
+      case 'GreekAndLowercaseTransliteration':
+        return this.greekAndLowercaseTransliteration;
+      case 'Greek':
+        return this.greek;
+      default:
+        throw new Error('Invalid text');
     }
+  }
 
-    // get greekLowercase(): TransliteratedData {
-    //   return;
-    // }
+  // getters are overkill at this point
+  get transliteratedLowercase(): TransliteratedData {
+    return TransliteratedLowercase;
+  }
 
-    // get greek() : TransliteratedData {
-    //   return;
-    // }
+  get greekAndLowercaseTransliteration(): TransliteratedData {
+    return GreekAndLowercaseTransliteration;
+  }
+
+  get greek() : TransliteratedData {
+    return Greek;
+  }
 }

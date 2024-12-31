@@ -3,12 +3,14 @@ import './App.css'
 import Data, { Book, Chapter, TransliteratedData, Verse } from './data/data';
 import { NewTestamentBooks } from './data/books';
 import parse from 'html-react-parser';
+import { displayEntireBookName } from './helpers/helpers';
 
 type TextContainerProps = {
   searchInput: string;
   selectedBooks: Array<string>;
+  selectedText: string;
 }
-export const TextContainer = ({ searchInput, selectedBooks }: TextContainerProps) => {
+export const TextContainer = ({ searchInput, selectedBooks, selectedText }: TextContainerProps) => {
   console.log('renderText');
   const [filteredData, setFilteredData] = useState(Data.getInstance().transliteratedLowercase);
   const [instances, setInstances] = useState<number>(0);
@@ -17,7 +19,7 @@ export const TextContainer = ({ searchInput, selectedBooks }: TextContainerProps
   // have regex search that can find "ego" + random text + "eimi" (difficult to do, potential security vulnerability)
   // ^ maybe multi word search with dynamic number of search fields
   useEffect((): void => {
-    const allBooks: TransliteratedData = Data.getInstance().transliteratedLowercase;
+    const allBooks: TransliteratedData = Data.getInstance().textSelector(selectedText);
     let foundInstances = 0;
 
     // Hashmap would be faster but there are only 27 entries
@@ -46,15 +48,11 @@ export const TextContainer = ({ searchInput, selectedBooks }: TextContainerProps
     })).filter((book) => book.chapters.length > 0);
     setFilteredData(filtered);
     setInstances(foundInstances);
-  }, [searchInput, selectedBooks]);
+  }, [searchInput, selectedBooks, selectedText]);
 
   // Documentation for text normalization https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize
   const normalizeText = (text: string): string => {
     return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  }
-
-  const displayEntireBookName = (key: keyof typeof NewTestamentBooks) => {
-    return NewTestamentBooks[key];
   }
 
   const copyToClipboard = async () => {
@@ -114,7 +112,7 @@ export const TextContainer = ({ searchInput, selectedBooks }: TextContainerProps
   };
 
   return (
-    <div className="p-4 bg-white border rounded-md shadow-md max-h-[74vh] overflow-y-auto">
+    <div className="p-4 bg-white border rounded-md shadow-md max-h-[84vh] overflow-y-auto">
       {instances > 0 && (
         <span className="block mb-4 text-green-600 font-medium">
           Found {instances} instance(s)
