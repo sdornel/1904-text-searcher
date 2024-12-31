@@ -9,14 +9,14 @@ describe('App Component', () => {
 
   it('renders all main components', () => {
     render(<App />);
-    expect(screen.getByPlaceholderText('Enter search query')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Enter search query (min 3 characters)')).toBeInTheDocument();
     expect(screen.getByRole('combobox')).toBeInTheDocument();
     expect(screen.getByText('Select book(s)')).toBeInTheDocument();
   });
 
   it('updates search input state when typing', () => {
     render(<App />);
-    const searchInput = screen.getByPlaceholderText('Enter search query');
+    const searchInput = screen.getByPlaceholderText('Enter search query (min 3 characters)');
 
     fireEvent.change(searchInput, { target: { value: 'test query' } });
     expect(searchInput).toHaveValue('test query');
@@ -32,7 +32,7 @@ describe('App Component', () => {
 
   it('calls handleSearch on search button click', () => {
     render(<App />);
-    const searchInput = screen.getByPlaceholderText('Enter search query');
+    const searchInput = screen.getByPlaceholderText('Enter search query (min 3 characters)');
     const searchButton = screen.getByRole('button', { name: 'Search' });
 
     fireEvent.change(searchInput, { target: { value: 'search term' } });
