@@ -17,16 +17,16 @@ It serves these purposes:
      ^ WIP needs to be updated
 
 To view the text in its entirety:
-- cat transliterated.lowercase.txt
+- cat transliterated_lowercase.txt
 
 If searching for "egō eimi" via mac/linux terminal:
-- grep "egō eimi" transliterated.lowercase.txt
+- grep "egō eimi" transliterated_lowercase.txt
 
-To count the occurrences of the phrase "egō eimi" in transliterated.lowercase.txt, you can use the grep command with the -c option. This will count the number of matching lines:
-- grep -c "egō eimi" transliterated.lowercase.txt
+To count the occurrences of the phrase "egō eimi" in transliterated_lowercase.txt, you can use the grep command with the -c option. This will count the number of matching lines:
+- grep -c "egō eimi" transliterated_lowercase.txt
 
 If you want to ensure that you're counting exact word matches and not partial matches (e.g., pantokratōros), use grep with the -w option:
-- grep -cw "pantokratōr" transliterated.lowercase.txt
+- grep -cw "pantokratōr" transliterated_lowercase.txt
 
 To highlight occurrences of the string in the output, use (assuming your terminal does not already highlight by default):
-- grep --color=always "egō eimi" transliterated.lowercase.txt
+- grep --color=always "egō eimi" transliterated_lowercase.txt
