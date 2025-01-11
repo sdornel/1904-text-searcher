@@ -13,7 +13,7 @@ describe('Search Component', () => {
   it('renders input, dropdown, and buttons correctly', () => {
     render(<Search handleSearch={mockHandleSearch} handleTextChange={mockHandleTextChange} />);
     
-    expect(screen.getByPlaceholderText('Enter search query')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('Enter search query (min 3 characters)')).toBeInTheDocument();
     expect(screen.getByRole('combobox')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Search' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Reset' })).toBeInTheDocument();
@@ -21,7 +21,7 @@ describe('Search Component', () => {
 
   it('updates the search query state when typing in the input field', () => {
     render(<Search handleSearch={mockHandleSearch} handleTextChange={mockHandleTextChange} />);
-    const input = screen.getByPlaceholderText('Enter search query');
+    const input = screen.getByPlaceholderText('Enter search query (min 3 characters)');
 
     fireEvent.change(input, { target: { value: 'test query' } });
     expect(input).toHaveValue('test query');
@@ -29,7 +29,7 @@ describe('Search Component', () => {
 
   it('calls handleSearch with query on form submit', () => {
     render(<Search handleSearch={mockHandleSearch} handleTextChange={mockHandleTextChange} />);
-    const input = screen.getByPlaceholderText('Enter search query');
+    const input = screen.getByPlaceholderText('Enter search query (min 3 characters)');
     const searchButton = screen.getByRole('button', { name: 'Search' });
 
     fireEvent.change(input, { target: { value: 'test query' } });
@@ -57,7 +57,7 @@ describe('Search Component', () => {
 
   it('submits the form when Enter is pressed in the input field', () => {
     render(<Search handleSearch={mockHandleSearch} handleTextChange={mockHandleTextChange} />);
-    const input = screen.getByPlaceholderText('Enter search query');
+    const input = screen.getByPlaceholderText('Enter search query (min 3 characters)');
     const form = input.closest('form') as HTMLFormElement;
   
     fireEvent.change(input, { target: { value: 'enter key query' } });
@@ -68,7 +68,7 @@ describe('Search Component', () => {
 
   it('dropdown selection does not reset the search query', () => {
     render(<Search handleSearch={mockHandleSearch} handleTextChange={mockHandleTextChange} />);
-    const input = screen.getByPlaceholderText('Enter search query');
+    const input = screen.getByPlaceholderText('Enter search query (min 3 characters)');
     const dropdown = screen.getByRole('combobox');
 
     fireEvent.change(input, { target: { value: 'query remains' } });
@@ -81,7 +81,9 @@ describe('Search Component', () => {
     render(<Search handleSearch={mockHandleSearch} handleTextChange={mockHandleTextChange} />);
     const searchButton = screen.getByRole('button', { name: 'Search' });
 
+    expect(searchButton).toBeDisabled();
+
     fireEvent.click(searchButton);
-    expect(mockHandleSearch).toHaveBeenCalledWith('');
+    expect(mockHandleSearch).not.toHaveBeenCalled();
   });
 });
