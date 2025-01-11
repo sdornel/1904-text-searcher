@@ -11,9 +11,9 @@ If typescript is too strict you can modify the tsconfig.app.json to be less stri
 
 This repository contains copies of the 1904 Patriarchal text. It uses texts found in https://github.com/bibleproofs/1904/.
 It serves these purposes:
-- 1) Allows the public to easily access the 1904 Patriarchal text
-- 2) Search the 1904 Patriarchal text for specific words/phrases
-- 3) Through various patterns that exist in the text show the Holy Scriptures are divinely inspired
+1) Allows the public to easily access the 1904 Patriarchal text
+2) Search the 1904 Patriarchal text for specific words/phrases
+3) Through various patterns that exist in the text show the Holy Scriptures are divinely inspired
      ^ WIP needs to be updated
 
 To view the text in its entirety:
