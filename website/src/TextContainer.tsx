@@ -117,8 +117,6 @@ export const TextContainer = ({ searchInput, selectedBooks, selectedText }: Text
     return result;
   };
 
-  console.log('instances', instances);
-
   return (
     <div className="p-4 bg-white border rounded-md shadow-md max-h-[84vh] overflow-y-auto">
       {instances > 0 && (
