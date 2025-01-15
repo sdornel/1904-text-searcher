@@ -40,7 +40,6 @@ export const TextContainer = ({ searchInput, selectedBooks, selectedText }: Text
             const normalizedSearchInput = normalizeText(searchInput.toLowerCase());
 
             if (normalizedVerseText.includes(normalizedSearchInput) && normalizedSearchInput.length > 0) {
-              console.log('got here');
               foundInstances += countInstances(normalizedVerseText, normalizedSearchInput);
             }
               return normalizedVerseText.includes(normalizedSearchInput);
