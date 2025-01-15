@@ -40,6 +40,7 @@ export const TextContainer = ({ searchInput, selectedBooks, selectedText }: Text
             const normalizedSearchInput = normalizeText(searchInput.toLowerCase());
 
             if (normalizedVerseText.includes(normalizedSearchInput) && normalizedSearchInput.length > 0) {
+              console.log('got here');
               foundInstances += countInstances(normalizedVerseText, normalizedSearchInput);
             }
               return normalizedVerseText.includes(normalizedSearchInput);
@@ -56,11 +57,10 @@ export const TextContainer = ({ searchInput, selectedBooks, selectedText }: Text
   }
 
   const countInstances = (normalizedVerseText: string, normalizedSearchInput: string): number => {  
-    const regex = new RegExp(`\\b${normalizedSearchInput}\\b`, 'g');
+    const regex = new RegExp(`\\b${normalizedSearchInput}`, 'gi');
     const matches = normalizedVerseText.match(regex);
-  
     return matches ? matches.length : 0;
-  };  
+  };
 
   const copyToClipboard = async () => {
     const textToCopy = filteredData
@@ -117,6 +117,8 @@ export const TextContainer = ({ searchInput, selectedBooks, selectedText }: Text
   
     return result;
   };
+
+  console.log('instances', instances);
 
   return (
     <div className="p-4 bg-white border rounded-md shadow-md max-h-[84vh] overflow-y-auto">
