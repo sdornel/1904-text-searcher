@@ -55,8 +55,12 @@ export const TextContainer = ({ searchInput, selectedBooks, selectedText }: Text
     return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   }
 
+  const escapeRegExp = (s: string): string =>
+    s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
   const countInstances = (normalizedVerseText: string, normalizedSearchInput: string): number => {  
-    const regex = new RegExp(`\\b${normalizedSearchInput}`, 'gi');
+    // const regex = new RegExp(`\\b${normalizedSearchInput}`, 'gi');
+    const regex = new RegExp(`(?:^|\\P{L})${escapeRegExp(normalizedSearchInput)}(?=\\P{L}|$)`, 'giu');
     const matches = normalizedVerseText.match(regex);
     return matches ? matches.length : 0;
   };
