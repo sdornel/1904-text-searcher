@@ -80,9 +80,14 @@ describe('TextContainer', () => {
     expect(verseNumbers.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('displays found instances', async () => {
+  it('displays found instances of latin script', async () => {
     render(<TextContainer searchInput="Test" selectedBooks={[]} selectedText='TransliteratedLowercase' />);
     expect(screen.getByText('Found 2 instance(s)')).toBeInTheDocument();
+  });
+
+  it('displays found instances of greek script', async () => {
+    render(<TextContainer searchInput="Γειά σου" selectedBooks={[]} selectedText='Greek' />);
+    expect(screen.getByText('Found 1 instance(s)')).toBeInTheDocument();
   });
 
   it('"e" includes diacriticals when searching', () => {
