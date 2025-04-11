@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { InfoPanel } from './InfoPanel';
+import { InfoPanel } from './InfoModal';
 
 type SearchProps = {
   handleSearch: (query: string) => void;
