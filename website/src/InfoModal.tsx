@@ -32,7 +32,7 @@ export const InfoPanel = ({ onClose }: InfoPanelProps) => {
     >
       <div
         ref={modalRef}
-        className="bg-white w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl p-8 space-y-6 relative"
+        className="modal-scroll-hide bg-white w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl p-8 space-y-6 relative"
       >
         <div className="flex justify-between items-center border-b pb-4">
           <h2 className="text-2xl font-bold text-red-900">Understanding the Patterns of Forty</h2>
@@ -48,11 +48,11 @@ export const InfoPanel = ({ onClose }: InfoPanelProps) => {
           <p>
             The 1904 Patriarchal Text of the Greek Holy Scriptures contains recurring "patterns of forty"
             involving the numbers 40 and 41. These patterns support the divine inspiration of Scripture
-            and align with Orthodox interpretation. Validating them requires computational tools like the
+            and align with Orthodox interpretation. Validating them requires tools like the
             Linux terminal's grep, or the user-friendly 1904 Scripture Search Tool, which uses English
             transliteration alongside Greek. Understanding a core set of examples helps reveal deeper
-            patterns, many of which relate to key doctrines such as Christology and Soteriology, making
-            some familiarity with Christian theology helpful.
+            patterns. Many patterns relate to key doctrines such as Christology and Soteriology, making
+            familiarity with Christian theology helpful. <a className="text-blue-500" href="https://github.com/sdornel" target="_blank" rel="noopener noreferrer">Learn more</a>
           </p>
 
           <p>In general the patterns comprise the following elements / attributes:</p>
